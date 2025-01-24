@@ -21,16 +21,21 @@ def aStar(ruler: Regua):
     heapq.heappush(queue, (startH, 0, ruler.ruler)) #startH como f(x) pois g(x) = 0
     statesVisited = set()
     nodesExpanded = 0
+    maxMemoryUsed = 1
     
     while queue:
         fValue, gValue, currentState = heapq.heappop(queue)
         blank = currentState.index("-") #estado vazio
         nodesExpanded += 1
+        maxMemoryUsed = max(maxMemoryUsed, len(queue))
         print(f"f(x): {fValue}\n Estado: {currentState}")
         if currentState == meta:
-            print(f"Nos expandidos: {nodesExpanded}")
             endTime = time.time()
+            print(f"Nos expandidos: {nodesExpanded}")
+            print(f"Quantidades de passos: {gValue}")
+            print(f"Memoria maxima utilizada(nos na fronteira): {maxMemoryUsed}")
             print(f"Tempo de execucao da busca A*(distancia de manhattan) para uma regua de tamanho {ruler.size}: {(endTime - startTime): .6f}")
+           
             return currentState
 
         for i in range(len(currentState)):  #expandindo a arqvore. -1 pois o ultimo elemento nao precisa ser trocado
