@@ -1,4 +1,4 @@
 from .Regua import Regua
-from .bfs import bfs, bfs2
+from .bfs import bfs
 from .a_search import aStar
 from .ids import ids
