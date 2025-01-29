@@ -2,6 +2,15 @@ from src import Regua
 import time
 
 def bfs(ruler: Regua):
+    """
+    Realiza a busca em largura para encontrar a solucao do problema da regua a partir de um estado inicial pertencente a uma regua
+
+    Parametros:
+            ruler(Regua): objeto que representa a regua (sera utilizado o atributo ruler como estado inicial)
+
+    Retorno:
+            state(list): estado final da regua
+    """
     queue = []
     queue.append(ruler.ruler)
     statesVisited = set()
@@ -27,7 +36,7 @@ def bfs(ruler: Regua):
             print(f"Nos expandidos: {nodesExpanded}")
             print(f"Quantidades de passos: {len(statesVisited) - 1}")
             print(f"Memoria maxima utilizada(nos na fronteira): {maxMemoryUsed}")
-            print(f"Tempo de execucao do BFS para uma regua de tamanho {ruler.size}: {(endTime - startTime): .6f}")
+            print(f"Tempo de execucao do BFS para uma regua de tamanho {ruler.size}: {(endTime - startTime): .6f}\n")
             return state
         else:
             for i in range(length):  #expandindo a arqvore
