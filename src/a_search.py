@@ -12,12 +12,35 @@ def manhattanDistance(ruler: list, meta: list):
 
     return distance
 
-def aStar(ruler: Regua):
+# Heurística 2: Número de Inversões
+def inversion(ruler: list, meta: list):
+    inversions = 0
+    for i in range(len(ruler)):
+        for j in range(i + 1, len(ruler)):
+            if ruler[i] != "-" and ruler[j] != "-" and meta.index(ruler[i]) > meta.index(ruler[j]):
+                inversions += 1
+    return inversions
+
+def aStar(ruler: Regua, manhattan = True):
+    """
+    Realiza a busca A* para encontrar a solucao do problema da regua a partir de um estado inicial pertencente a uma regua.
+    Por padrao, o algorimo utiliza a distancia de manhattan como heuristica, mas pode ser alterado para o numero de inversoes.
+
+    Parametros:
+            ruler(Regua): objeto que representa a regua (sera utilizado o atributo ruler como estado inicial)
+            manhattan(bool): se True, utiliza a distancia de manhattan como heuristica, caso contrario, utiliza o numero de inversoes
+
+    Retorno:
+            state(list): estado final da regua
+    """
     startTime = time.time()
     queue = []
     n = (ruler.size - 1) // 2
     meta = ["-"] + ["B"] * n + ["A"] * n #estado meta igual o bfs
-    startH = manhattanDistance(ruler.ruler, meta) #heuristica do estado atual para o meta
+    if manhattan:
+        startH = manhattanDistance(ruler.ruler, meta) #heuristica do estado atual para o meta
+    else:
+        startH = inversion(ruler.ruler, meta)
     heapq.heappush(queue, (startH, 0, ruler.ruler)) #startH como f(x) pois g(x) = 0
     statesVisited = set()
     nodesExpanded = 0
