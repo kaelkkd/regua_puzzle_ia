@@ -29,14 +29,14 @@ def bfs(ruler: Regua):
         blank = state.index("-") #estado vazio
         nodesExpanded += 1
         maxMemoryUsed = max(maxMemoryUsed, len(queue))
-        print(state)
+
 
         if state == ["-"] + ["B"] * n + ["A"] * n: #presumindo que o estado meta seja o que tenha o espaco em branco como primeiro elemento ['-', 'B', 'B', 'A', 'A'] 
             endTime = time.time()
             print(f"Nos expandidos: {nodesExpanded}")
             print(f"Quantidades de passos: {len(statesVisited) - 1}")
             print(f"Memoria maxima utilizada(nos na fronteira): {maxMemoryUsed}")
-            print(f"Tempo de execucao do BFS para uma regua de tamanho {ruler.size}: {(endTime - startTime): .6f}\n")
+            print(f"Tempo de execucao do BFS para uma regua de tamanho {ruler.size}: {(endTime - startTime): .10f}\n")
             return state
         else:
             for i in range(length):  #expandindo a arqvore
