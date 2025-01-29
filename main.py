@@ -1,13 +1,8 @@
-import time
-from src import bfs
-from src import aStar
-from src import Regua
+from src import Regua, bfs, ids, aStar
 
 if __name__ == '__main__':
-    test = Regua(5)
+    test = Regua(21)
+    c = aStar(test)
+    d = aStar(test, False)
+    b = ids(test)
     a = bfs(test)
-    b = aStar(test)
-    # startTime = time.time()
-    
-    # endTime = time.time()
-    # print(f"Tempo de execucao do BFS para uma regua de tamanho {test.size}: {(endTime - startTime): .6f}")

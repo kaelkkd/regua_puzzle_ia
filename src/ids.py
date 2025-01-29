@@ -8,7 +8,6 @@ def dfs(state: list, meta: list, depth: int, nodesExpanded: int, maxMemoryUsed: 
     if depth <= 0:
         return False, nodesExpanded, maxMemoryUsed
     
-    print(state)
     blank = state.index("-")
     n = (len(state) - 1) // 2
     for i in range(max(0, blank - n), min(len(state), blank + n + 1)): #busca somente nos vizinhos do estado vazio
@@ -17,7 +16,7 @@ def dfs(state: list, meta: list, depth: int, nodesExpanded: int, maxMemoryUsed: 
         newState = state[:]
         newState[blank] = newState[i]
         newState[i] = "-"
-        
+
         if tuple(newState) not in statesVisited:
             statesVisited.add(tuple(newState))
             nodesExpanded += 1
@@ -55,7 +54,7 @@ def ids(ruler: Regua, maxDepth = 100):
             print(f"Nos expandidos: {nodesExpanded}")
             print(f"Profundidade: {depth}")
             print(f"Memoria maxima utilizada(nos na fronteira): {maxMemoryUsed}")
-            print(f"Tempo de execucao do IDS para uma regua de tamanho {ruler.size}: {(endTime - startTime): .6f}\n")
+            print(f"Tempo de execucao do IDS para uma regua de tamanho {ruler.size}: {(endTime - startTime): .10f}\n")
             return result
         depth += 1
 

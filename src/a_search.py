@@ -51,13 +51,13 @@ def aStar(ruler: Regua, manhattan = True):
         blank = currentState.index("-") #estado vazio
         nodesExpanded += 1
         maxMemoryUsed = max(maxMemoryUsed, len(queue))
-        print(f"f(x): {fValue}\n Estado: {currentState}")
+        # print(f"f(x): {fValue}\n Estado: {currentState}")
         if currentState == meta:
             endTime = time.time()
             print(f"Nos expandidos: {nodesExpanded}")
             print(f"Quantidades de passos: {gValue}")
             print(f"Memoria maxima utilizada(nos na fronteira): {maxMemoryUsed}")
-            print(f"Tempo de execucao da busca A*(distancia de manhattan) para uma regua de tamanho {ruler.size}: {(endTime - startTime): .6f}")
+            print(f"Tempo de execucao da busca A*(distancia de manhattan) para uma regua de tamanho {ruler.size}: {(endTime - startTime): .10f}\n")
            
             return currentState
 
@@ -71,7 +71,10 @@ def aStar(ruler: Regua, manhattan = True):
             movementCost = abs(i - blank)
             newStateGValue = gValue + movementCost  #g(x) do novo estado
             if tuple(newState) not in statesVisited:
-                heapq.heappush(queue, (newStateGValue + manhattanDistance(newState, meta), newStateGValue, newState))
+                if manhattan:
+                    heapq.heappush(queue, (newStateGValue + manhattanDistance(newState, meta), newStateGValue, newState))
+                else:
+                    heapq.heappush(queue, (newStateGValue + inversion(newState, meta), newStateGValue, newState))
                 statesVisited.add(tuple(newState))
     
     print("Nao foi possivel encontrar uma solucao")    
